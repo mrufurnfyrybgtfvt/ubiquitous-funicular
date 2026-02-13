@@ -426,7 +426,8 @@ class CloudinaryManager:
                     upload_params["context"] = context_str
                     print(f"[CLOUDINARY MANAGER] Context string: {context_str[:100]}...")
             
-            # Upload with retry logic
+            # Upload with retry logic (add timeout to params)
+            upload_params["timeout"] = 120  # 2 minute timeout for upload
             upload_result = self.upload_with_retry(
                 cloudinary.uploader.upload,
                 image_path,
@@ -546,7 +547,8 @@ class CloudinaryManager:
                     upload_params["context"] = context_str
                     print(f"[CLOUDINARY MANAGER] Context string: {context_str[:100]}...")
             
-            # Upload with retry logic
+            # Upload with retry logic (add timeout to params)
+            upload_params["timeout"] = 300  # 5 minute timeout for video upload (larger files)
             upload_result = self.upload_with_retry(
                 cloudinary.uploader.upload,
                 video_path,
